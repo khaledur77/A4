@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+<style>
+    
+.geist {
+  font-family: "Geist", sans-serif;
+  font-optical-sizing: auto;
+ 
+}
+
+</style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="geist bg-[#F8FAFC]">
+    <header class="w-[90%] mx-auto">
+            <h2 class="text-[#002C5C] text-4xl font-bold my-8">Job Application Tracker</h2>
+        <div class="sm:grid grid-cols-1 md:grid grid-cols-3 gap-8">
+            <div class="p-4 rounded-2xl bg-white">
+                <p>Total</p>
+                <p class="font-bold text-2xl text-[#002C5C] my-1" id="total">0</p>
+            </div>
+            <div class="p-4 rounded-2xl bg-white">
+                <p>Interview</p>
+                <p class="font-bold text-2xl text-[#10B981] my-1" id="interview-count">0</p>
+            </div>
+            <div class="p-4 rounded-2xl bg-white">
+                <p>Rejected</p>
+                <p class="font-bold text-2xl text-[#EF4444] my-1" id="reject-count">0</p>
+            </div>
+        </div>
+    </header>
+
+    <hr class="my-8">
+    <main class="w-[90%] mx-auto">
+        <div class="flex justify-between">
+            <h2 class="text-3xl text-[#002C5C] font-medium mb-5">Available Jobs</h2>
+            <p class="text-[#002C5C] font-medium">8 Jobs</p>
+        </div>
+        <div>
+            <button id="all-filter-btn" class="bg-[#3B82F6] text-white px-8 py-2 rounded-[4px]">All</button>
+            <button id="interview-filter-btn" class="bg-white text-gray-500 px-7 py-2 rounded-[4px]">Interview</button>
+            <button id="rejected-filter-btn" class="bg-white text-gray-500 px-7 py-2 rounded-[4px]">Rejected</button>
+        </div>
+
+        
+    </main>
+    <script type="module" src="scrift.js"></script>
+</body>
+</html>
