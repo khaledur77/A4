@@ -6,18 +6,13 @@ let total = document.getElementById('total');
 let interviewCount = document.getElementById('interview-count');
 let rejectedCount = document.getElementById('rejected-count');
 
-
 const allcardsection = document.getElementById('all-cards')
 const mainContainer = document.querySelector('main')
 const filterSection = document.getElementById('filtered-section')
-// interviewlist.push({name:'kha 1'},{name:'kha 1'})
-//console.log(mainContainer)
+
 const allfilterbtn = document.getElementById('all-filter-btn');
 const interviewfilterbtn = document.getElementById('interview-filter-btn');
 const rejectedfilterbtn = document.getElementById('rejected-filter-btn');
-// allfilterbtn.addEventListener('click',function(){
-//     alert("click from")
-// })
 
 function calculatecount(){
     total.innerText = allcardsection.children.length
@@ -59,6 +54,7 @@ mainContainer.addEventListener('click',function(event){
 
    if(event.target.classList.contains('interview-btn')){
         const parenNode = event.target.parentNode.parentNode;
+
         const project = parenNode.querySelector('.project').innerText
         const address = parenNode.querySelector('.address').innerText
         const task = parenNode.querySelector('.task').innerText
@@ -88,7 +84,8 @@ mainContainer.addEventListener('click',function(event){
             renderRejected()
         }
 
-    }else if(event.target.classList.contains('reject-btn')){
+    }
+    else if(event.target.classList.contains('reject-btn')){
         const parenNode = event.target.parentNode.parentNode;
         const project = parenNode.querySelector('.project').innerText
         const address = parenNode.querySelector('.address').innerText
@@ -118,10 +115,26 @@ mainContainer.addEventListener('click',function(event){
           if(currentstatus == "interview-filter-btn"){
             renderInterview()
           }
-        
+    }
+    else if(event.target.classList.contains('delete-btn')){
+        const card = event.target.closest('.card');
+        const project = card.querySelector('.project').innerText;
 
+         interviewlist = interviewlist.filter(item=>item.project !== project);
+         rejewctedlist = rejewctedlist.filter(item=>item.project !== project );
+
+         card.remove();
+
+         calculatecount();
+         if(currentstatus == "interview-filter-btn"){
+            renderInterview()
+          }
+          else if(currentstatus == 'rejected-filter-btn'){
+            renderRejected()
+        }
     }
 })
+
 
 function renderInterview(){
     filterSection.innerHTML = ''
@@ -129,7 +142,7 @@ function renderInterview(){
     for(let interview of interviewlist){
        
         let div = document.createElement('div');
-        div.classname = 'card flex justify-between mt-8 bg-white p-8'
+        div.className = 'card flex justify-between mt-8 bg-white p-8'
         div.innerHTML = `
         <div class="space-y-4">
                     
@@ -145,7 +158,7 @@ function renderInterview(){
                         <li>$80000-$130000</li>
                     </ul>
                     
-                    <p class="status">${interview.status}</p>
+                    <p class="status font-bold">${interview.status}</p>
                     <p class="notes">Build cross-platform mobile applications using React Native. Work on products used by millions of users worldwide.</p>
                     
                     <div class="flex gap-5">
@@ -154,7 +167,7 @@ function renderInterview(){
                     </div>
                 </div>
                 
-                <div><img src="Trash.png" alt=""></div>`
+                <div><p class="delete-btn border-1 px-4 py-1 rounded-[4px] ">Delete</p></div>`
 
                 filterSection.appendChild(div)
     }
@@ -165,7 +178,7 @@ function renderRejected(){
     for(let reject of rejewctedlist){
        
         let div = document.createElement('div');
-        div.classname = 'card flex justify-between mt-8 bg-white p-8'
+        div.className = 'card flex justify-between mt-8 bg-white p-8'
         div.innerHTML = `
         <div class="space-y-4">
                     
@@ -181,7 +194,7 @@ function renderRejected(){
                         <li>$80000-$130000</li>
                     </ul>
                     
-                    <p class="status">${reject.status}</p>
+                    <p class="status font-bold">${reject.status}</p>
                     <p class="notes">Build cross-platform mobile applications using React Native. Work on products used by millions of users worldwide.</p>
                     
                     <div class="flex gap-5">
@@ -190,7 +203,7 @@ function renderRejected(){
                     </div>
                 </div>
                 
-                <div><img src="Trash.png" alt=""></div>`
+                <div><p class="delete-btn border-1 px-4 py-1 rounded-[4px] ">Delete</p></div>`
 
                 filterSection.appendChild(div)
     }
