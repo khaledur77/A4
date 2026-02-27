@@ -6,10 +6,11 @@ let total = document.getElementById('total');
 let interviewCount = document.getElementById('interview-count');
 let rejectedCount = document.getElementById('rejected-count');
 
-const allcardsection = document.getElementById('all-cards')
-const mainContainer = document.querySelector('main')
-const filterSection = document.getElementById('filtered-section')
+const allcardsection = document.getElementById('all-cards');
+const mainContainer = document.querySelector('main');
+const filterSection = document.getElementById('filtered-section');
 
+const jobCountText = document.getElementById('job-count-text');
 const allfilterbtn = document.getElementById('all-filter-btn');
 const interviewfilterbtn = document.getElementById('interview-filter-btn');
 const rejectedfilterbtn = document.getElementById('rejected-filter-btn');
@@ -20,6 +21,34 @@ function calculatecount(){
     rejectedCount.innerText = rejewctedlist.length
 }
 calculatecount();
+
+//empty show........................................
+function showEmptyMessage(){
+    filterSection.innerHTML = `
+        <div class="text-center mt-8 p-8 bg-white rounded">
+            <img class="mx-auto" src="jobs.png" alt="">
+            <h2 class="font-bold text-2xl">No jobs available</h2>
+            <p>Check back soon for new opportunities</p>
+        </div>`;
+}
+
+//job count.............
+function updatejobtext(){
+
+    const totalJobs = allcardsection.children.length;
+
+        if(currentstatus == "interview-filter-btn"){
+           jobCountText.innerText = `${interviewlist.length} of ${totalJobs}Jobs`
+        }
+        else if(currentstatus == 'rejected-filter-btn'){
+            jobCountText.innerText = `${rejewctedlist.length} of ${totalJobs}Jobs`
+           
+        }
+        else{
+            jobCountText.innerText = `${totalJobs} jobs`
+        }
+}
+
 
 function toggleStyle(id){
     allfilterbtn.classList.remove('bg-blue-400', 'text-white');
@@ -48,6 +77,7 @@ function toggleStyle(id){
      filterSection.classList.remove('hidden')
      renderRejected()
     }
+    updatejobtext()//...............................
 }
 
 mainContainer.addEventListener('click',function(event){
@@ -78,12 +108,12 @@ mainContainer.addEventListener('click',function(event){
         }
 
         rejewctedlist = rejewctedlist.filter(item=>item.project != cardinfo.project )
-        calculatecount()
+        calculatecount();
+        updatejobtext();
 
         if(currentstatus == 'rejected-filter-btn'){
             renderRejected()
         }
-
     }
     else if(event.target.classList.contains('reject-btn')){
         const parenNode = event.target.parentNode.parentNode;
@@ -110,7 +140,8 @@ mainContainer.addEventListener('click',function(event){
         }
 
           interviewlist = interviewlist.filter(item=>item.project != cardinfo.project)
-          calculatecount()
+          calculatecount();
+          updatejobtext();
 
           if(currentstatus == "interview-filter-btn"){
             renderInterview()
@@ -124,8 +155,9 @@ mainContainer.addEventListener('click',function(event){
          rejewctedlist = rejewctedlist.filter(item=>item.project !== project );
 
          card.remove();
-
          calculatecount();
+         updatejobtext();
+         
          if(currentstatus == "interview-filter-btn"){
             renderInterview()
           }
@@ -138,6 +170,11 @@ mainContainer.addEventListener('click',function(event){
 
 function renderInterview(){
     filterSection.innerHTML = ''
+
+    if(interviewlist.length === 0){
+        showEmptyMessage();
+        return;
+    }
 
     for(let interview of interviewlist){
        
@@ -175,6 +212,10 @@ function renderInterview(){
 function renderRejected(){
     filterSection.innerHTML = ''
 
+    if(rejewctedlist.length === 0){
+        showEmptyMessage();
+        return
+    }
     for(let reject of rejewctedlist){
        
         let div = document.createElement('div');

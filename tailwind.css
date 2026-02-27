@@ -1,1 +1,9 @@
 @import "tailwindcss";
+
+Answer the Question part....
+
+1. What is the difference between getElementById, getElementsByClassName, and querySelector / querySelectorAll?
+Ans: 
+getElementById: It takes one element by spesific id (just ID),
+getElementsByClassName: It takes some element by class name and it's like array but not fully (just class).
+querySelector / querySelectorAll: 
